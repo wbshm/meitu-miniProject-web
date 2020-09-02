@@ -54,7 +54,26 @@ export const constantRoutes = [
       meta: { title: 'Dashboard', icon: 'dashboard' }
     }]
   },
-
+  {
+    path: '/admin/hotkey',
+    component: Layout,
+    redirect: '/admin/hotkey',
+    name: '关键词设置',
+    meta: { title: '关键词设置', icon: 'el-icon-s-help' },
+    children: [{
+      path: 'dashboard',
+      name: 'Dashboard',
+      component: () => import('@/views/dashboard/index'),
+      meta: { title: '关键词设置', icon: 'dashboard' }
+    }]
+  },
+  {
+    path: '/admin/search_config',
+    component: Layout,
+    redirect: '/admin/search_config',
+    name: '搜索设置',
+    meta: { title: '搜索设置', icon: 'el-icon-s-help' }
+  },
   {
     path: '/example',
     component: Layout,
