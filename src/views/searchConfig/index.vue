@@ -12,48 +12,30 @@
         </template>
       </el-table-column>
 
-      <el-table-column min-width="300" align="center" label="关键字">
+      <el-table-column min-width="300" align="center" label="提示信息">
         <template slot-scope="{row}">
           <template v-if="row.edit">
-            <el-input v-model="row.searchKey" size="large" />
+            <el-input v-model="row.configTitle" size="large" />
           </template>
-          <span v-else>{{ row.searchKey }}</span>
+          <span v-else>{{ row.configTitle }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column min-width="180" align="center" label="状态(0:开启,1:关闭)">
+      <el-table-column min-width="180" align="center" label="对应的Key">
         <template slot-scope="{row}">
           <template v-if="row.edit">
-            <el-input v-model="row.keyStatus" size="large" />
+            <el-input v-model="row.configKey" size="large" />
           </template>
-          <span v-else>{{ row.keyStatus }}</span>
+          <span v-else>{{ row.configKey }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column min-width="180" align="center" label="排序">
+      <el-table-column min-width="180" align="center" label="对应的Value">
         <template slot-scope="{row}">
           <template v-if="row.edit">
-            <el-input v-model="row.keyOrder" size="large" />
+            <el-input v-model="row.configValue" size="large" />
           </template>
-          <span v-else>{{ row.keyOrder }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column min-width="180" align="center" label="开始时间">
-        <template slot-scope="{row}">
-          <template v-if="row.edit">
-            <el-date-picker v-model="row.startTime" type="datetime" placeholder="Please pick a date" />
-          </template>
-          <span v-else>{{ row.startTime | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column min-width="180" align="center" label="结束时间">
-        <template slot-scope="{row}">
-          <template v-if="row.edit">
-            <el-date-picker v-model="row.endTime" type="datetime" placeholder="Please pick a date" />
-          </template>
-          <span v-else>{{ row.endTime | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
+          <span v-else>{{ row.configValue }}</span>
         </template>
       </el-table-column>
 
@@ -115,20 +97,14 @@
 
     <el-dialog title="新增" :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="100px" style="width: 400px; margin-left:50px;">
-        <el-form-item label="关键字" prop="searchKey">
-          <el-input v-model="temp.searchKey" :autosize="{ minRows: 2, maxRows: 4}" type="input" placeholder="Please input" />
+        <el-form-item label="提示信息" prop="configTitle">
+          <el-input v-model="temp.configTitle" :autosize="{ minRows: 2, maxRows: 4}" type="input" placeholder="Please input" />
         </el-form-item>
-        <el-form-item label="状态" prop="keyStatus">
-          <el-input v-model="temp.keyStatus" :autosize="{ minRows: 2, maxRows: 4}" type="number" placeholder="Please input" />
+        <el-form-item label="配置的Key" prop="configKey">
+          <el-input v-model="temp.configKey" :autosize="{ minRows: 2, maxRows: 4}" type="number" placeholder="Please input" />
         </el-form-item>
-        <el-form-item label="排序" prop="keyOrder">
-          <el-input v-model="temp.keyOrder" :autosize="{ minRows: 2, maxRows: 4}" type="number" placeholder="Please input" />
-        </el-form-item>
-        <el-form-item label="开始时间" prop="startTime">
-          <el-date-picker v-model="temp.startTime" type="datetime" placeholder="Please pick a date" />
-        </el-form-item>
-        <el-form-item label="结束时间" prop="endTime">
-          <el-date-picker v-model="temp.endTime" type="datetime" placeholder="Please pick a date" />
+        <el-form-item label="配置的Value" prop="configValue">
+          <el-input v-model="temp.configValue" :autosize="{ minRows: 2, maxRows: 4}" type="number" placeholder="Please input" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -144,7 +120,7 @@
 </template>
 
 <script>
-import { fetchList, updateHotkey, createHotkey, deleteHotkey } from '@/api/hotkeyApi'
+import { fetchList, updateSearchConfig, createSearchConfig, deleteSearchConfig } from '@/api/searchConfigApi'
 import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination'
 
@@ -213,7 +189,7 @@ export default {
     confirmEdit(row) {
       row.edit = false
       console.log(row)
-      updateHotkey(row)
+      updateSearchConfig(row)
       this.$message({
         message: '更新成功',
         type: 'success'
@@ -238,13 +214,13 @@ export default {
       })
     },
     async createData() {
-      if (this.temp.searchKey.length === 0) {
+      if (this.temp.configKey.length === 0) {
         this.$message({
           message: '关键字不能为空',
           type: 'warning'
         })
       } else {
-        await createHotkey(this.temp)
+        await createSearchConfig(this.temp)
         this.dialogFormVisible = false
         this.getList()
         this.$message({
@@ -254,7 +230,7 @@ export default {
       }
     },
     async handleDelete(id) {
-      await deleteHotkey(id)
+      await deleteSearchConfig(id)
       this.getList()
       this.$message({
         message: '删除成功',
