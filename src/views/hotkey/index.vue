@@ -42,7 +42,7 @@
       <el-table-column min-width="180" align="center" label="开始时间">
         <template slot-scope="{row}">
           <template v-if="row.edit">
-            <el-date-picker v-model="row.startTime" type="datetime" placeholder="Please pick a date" />
+            <el-date-picker v-model="row.startTime" type="datetime" format="yyyy-MM-dd HH:mm:ss" value-format="timestamp" placeholder="Please pick a date" />
           </template>
           <span v-else>{{ row.startTime | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
         </template>
@@ -51,7 +51,7 @@
       <el-table-column min-width="180" align="center" label="结束时间">
         <template slot-scope="{row}">
           <template v-if="row.edit">
-            <el-date-picker v-model="row.endTime" type="datetime" placeholder="Please pick a date" />
+            <el-date-picker v-model="row.endTime" type="datetime" format="yyyy-MM-dd HH:mm:ss" value-format="timestamp" placeholder="选择结束时间" />
           </template>
           <span v-else>{{ row.endTime | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
         </template>
@@ -125,10 +125,10 @@
           <el-input v-model="temp.keyOrder" :autosize="{ minRows: 2, maxRows: 4}" type="number" placeholder="Please input" />
         </el-form-item>
         <el-form-item label="开始时间" prop="startTime">
-          <el-date-picker v-model="temp.startTime" type="datetime" placeholder="Please pick a date" />
+          <el-date-picker v-model="temp.startTime" type="datetime" format="yyyy-MM-dd HH:mm:ss" placeholder="Please pick a date" />
         </el-form-item>
         <el-form-item label="结束时间" prop="endTime">
-          <el-date-picker v-model="temp.endTime" type="datetime" placeholder="Please pick a date" />
+          <el-date-picker v-model="temp.endTime" type="datetime" format="yyyy-MM-dd HH:mm:ss" placeholder="Please pick a date" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">

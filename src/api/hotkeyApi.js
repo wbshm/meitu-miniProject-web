@@ -11,7 +11,6 @@ export function fetchList(query) {
 export function createHotkey(data) {
   data.startTime = data.startTime.getTime()
   data.endTime = data.endTime.getTime()
-  console.log(data)
   return request({
     url: '/admin/hotkey',
     method: 'post',

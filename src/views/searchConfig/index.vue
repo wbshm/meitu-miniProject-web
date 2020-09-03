@@ -101,10 +101,10 @@
           <el-input v-model="temp.configTitle" :autosize="{ minRows: 2, maxRows: 4}" type="input" placeholder="Please input" />
         </el-form-item>
         <el-form-item label="配置的Key" prop="configKey">
-          <el-input v-model="temp.configKey" :autosize="{ minRows: 2, maxRows: 4}" type="number" placeholder="Please input" />
+          <el-input v-model="temp.configKey" :autosize="{ minRows: 2, maxRows: 4}" type="input" placeholder="Please input" />
         </el-form-item>
         <el-form-item label="配置的Value" prop="configValue">
-          <el-input v-model="temp.configValue" :autosize="{ minRows: 2, maxRows: 4}" type="number" placeholder="Please input" />
+          <el-input v-model="temp.configValue" :autosize="{ minRows: 2, maxRows: 4}" type="input" placeholder="Please input" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
